@@ -33,12 +33,6 @@ public class PlayerInputHandler : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -66,8 +60,6 @@ public class PlayerInputHandler : MonoBehaviour
         // Apply smoothed rotations
         cameraTarget.rotation = Quaternion.Euler(pitch, yaw, 0f);
         orientation.rotation = Quaternion.Euler(0f, yaw, 0f);
-
-
     }
 
     private void HandleMovement()
@@ -79,7 +71,4 @@ public class PlayerInputHandler : MonoBehaviour
 
         characterController.Move(moveDirection);
     }
-    
-    
-    
 }
