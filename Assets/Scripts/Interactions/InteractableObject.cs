@@ -10,7 +10,4 @@ public class InteractableObject : MonoBehaviour, IInteractable
         set => _onInteract = value;
     }
     public void Interact() => _onInteract.Invoke();
-
-
-
 }

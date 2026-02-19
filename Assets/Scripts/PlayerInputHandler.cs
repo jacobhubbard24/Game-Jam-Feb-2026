@@ -7,7 +7,7 @@ public class PlayerInputHandler : MonoBehaviour
 {
 
     [Header("Input Action Asset")]
-    [SerializeField] private PlayerControls playerControls;
+    [SerializeField] private PlayerInput playerInput;
     [SerializeField] private Vector2 currentInput;
     [Header("Character Info")]
     [SerializeField] private float moveSpeed = 0.015f;
@@ -29,8 +29,7 @@ public class PlayerInputHandler : MonoBehaviour
     private float pitch = 0f;
 
     private void Awake(){
-        playerControls = new PlayerControls();
-        playerControls.Player.Enable();
+        playerInput = GetComponent<PlayerInput>();
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -54,7 +53,7 @@ public class PlayerInputHandler : MonoBehaviour
     // Handles the camera and player rotation from mouse input
     private void HandleLook()
     {
-        var rawLook = playerControls.Player.Look.ReadValue<Vector2>();
+        var rawLook = playerInput.actions["Look"].ReadValue<Vector2>();
 
         targetYaw += rawLook.x * mouseSensitivity;
         targetPitch -= rawLook.y * mouseSensitivity;
@@ -75,9 +74,12 @@ public class PlayerInputHandler : MonoBehaviour
     {
         var clampedRotation = orientation.rotation;
 
-        currentInput = playerControls.Player.Move.ReadValue<Vector2>();
+        currentInput = playerInput.actions["Move"].ReadValue<Vector2>();
         moveDirection = orientation.forward * currentInput.y * moveSpeed + orientation.right * currentInput.x * moveSpeed;
 
         characterController.Move(moveDirection);
     }
+    
+    
+    
 }
