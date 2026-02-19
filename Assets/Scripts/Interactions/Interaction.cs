@@ -11,13 +11,11 @@ public class Interaction : MonoBehaviour
     private void Awake()
     {
         _playerInput = GetComponent<PlayerInput>();
-        Debug.Log(_playerInput.notificationBehavior);
     }
 
     private void OnEnable()
     {
         _playerInput.actions["Interact"].performed += DoInteract; // Add listeners
-        Debug.Log(_playerInput.notificationBehavior);
     }
     
     private void OnDisable()
@@ -28,9 +26,9 @@ public class Interaction : MonoBehaviour
     //Perform Raycasts
     private void DoInteract(InputAction.CallbackContext context)
     {
-        if (!Physics.Raycast(_transform.position + (Vector3.up * 0.3f) + (_transform.forward * 0.2f), _transform.forward, out var hit, 100f, interactableLayer)) return;
+        if (!Physics.Raycast(_transform.position + (Vector3.up * 0.3f) + (_transform.forward * 0.5f), _transform.forward, out var hit, 5f, interactableLayer)) return;
         if (!hit.transform.TryGetComponent(out InteractableObject interactable)) return; //Try to get the component Interactable
         interactable.Interact();
-        Debug.Log("Interact");
+		Debug.Log("Interaction");
     }
 }
