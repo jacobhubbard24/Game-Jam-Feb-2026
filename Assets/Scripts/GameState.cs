@@ -7,7 +7,7 @@ public class GameState : MonoBehaviour
     [SerializeField] private int state;
     [SerializeField] private bool stateChanged;
 
-    private void Update()
+    public void CheckState()
     {
         if (stateChanged)
         {
